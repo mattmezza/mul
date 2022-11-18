@@ -1,0 +1,34 @@
+list0 = {none};
+list1 = {:(a)             pair(a, none);};
+list2 = {:(a, b)          pair(a, list1(b));};
+list3 = {:(a, b, c)       pair(a, list2(b, c));};
+list4 = {:(a, b, c, d)    pair(a, list3(b, c, d));};
+list5 = {:(a, b, c, d, e) pair(a, list4(b, c, d, e));};
+
+prepend = pair;
+
+append =
+{:(lst, item)
+    if(equals(lst, none), {
+        list1(item);
+    }, {
+        pair(first(lst), append(second(lst), item));
+    });
+};
+
+for =
+{:(l, fn)
+    if(not(equals(l, none)), {
+        fn(first(l));
+        for(second(l), fn);
+    }, { });
+};
+
+reduce =
+{:(l, fn, acc)
+    if(not(equals(l, none)), {
+        reduce(second(l), fn, fn(first(l), acc));
+    }, {
+        acc;
+    });
+};

@@ -1,0 +1,10 @@
+sum = {:(a, b) a + b;};
+sub = {:(a, b) a - b;};
+mul = {:(a, b) a * b;};
+div = {:(a, b) a / b;};
+pow =
+{:(b, e)
+   if(equals(0, e), {1;}, {
+        pow(b, e - 1) * b;
+   });
+};

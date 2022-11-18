@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "mul"
+version = "0.1.0"
+description = "mul · My Useless Language, a simple interpreted programming language"
+authors = ["Matteo Merola <mattmezza@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+flake8-pyproject = "^1.2.0"
+flake8 = "^5.0.4"
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 79
+
+[tool.flake8]
+ignore = ['E231', 'E241']
+per-file-ignores = [
+    '__init__.py:F401',
+]
+count = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,8 @@
+assert =
+{:(v)
+    if(v, {v;}, {
+        print("Assert failed.");STD_TEST_ASSERT_FAILED;
+    }
+    );
+};
+
