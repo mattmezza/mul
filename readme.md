@@ -157,7 +157,8 @@ For more examples, browse through the [std](https://github.com/mattmezza/mul/tre
 # Installation
 
 `mul` is currently not installable via any pkg manager. If you want to play 
-with it, you'll have to clone the repo. It works on `python3.11.0rc2`.
+with it, you'll have to clone the repo. It works with `python3.11.0rc2`, but 
+it should also work with lower versions of `python3`.
 
 
 # Contributing
