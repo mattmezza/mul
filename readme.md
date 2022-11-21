@@ -214,8 +214,23 @@ A number of functions are implemented via native hooks:
 
 # Tooling
 
-There is no executor at the moment (altough creating one can be done quite 
-easily). There is a `REPL` interface though:
+## Execution
+
+`mul` programs can be run via `python -m mul program.mul`.
+
+Given `hello_world.mul` containing:
+```
+greeter = {:(who) print('Hello, ' + who + '!');};
+greeter('world');
+```
+
+```
+$ python -m mul hello_world.mul
+Hello, world!
+```
+
+
+There is also a `REPL` interface:
 
 ```
 $ python -m mul
@@ -226,8 +241,12 @@ Type.NUM
 
 `ctrl+d` quits the `REPL`.
 
+## Development
 
-# Examples
+- `python -m mul program.mul -t`: prints the tokens as parsed by the lexer
+- `python -m mul program.mul -a`: prints the AST as parsed by the parser
+
+# Code Examples
 
 ```
 pow =
