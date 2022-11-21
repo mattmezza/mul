@@ -81,5 +81,73 @@ constructs are implemented in a native way in the form of a function.
 
 For instance, there is an `if` function that you can use like so:
 ```
-if(predicate, function, function_else);
+if(boolean, function, function_else);
 ```
+
+### Comments
+
+Single line comments are allowed by prepending the comment text with a `#`.
+
+```
+# this is a comment
+a = 5;  # this is a comment too
+```
+
+### The standard library
+
+A very small `std` has been built so far. It includes things like:
+
+- `list` a pair based list implementation
+- `logic` things like `and`, `or`, `all`, etc...
+- `operator` functions like `sum`, `sub`, `mul`, `div`, etc...
+
+The `std` lib is extremely sparse and unstructured, beware.
+
+
+### Native hooks implementation
+
+`mul` is implemented via native function call hooks that make it possible to 
+export host language feature to `mul` itself (as done for the `if` function).
+
+Native hooks implementation can be leveraged to quickly fill holes in the 
+`std` lib.
+
+
+### Tooling
+
+There is no executor at the moment (altough creating one can be done quite 
+easily). There is a `REPL` interface though:
+
+```
+$ python -m mul
+> a = 5;
+Type.NUM
+5.0
+```
+
+`ctrl+d` quits the `REPL`.
+
+
+## Examples
+
+```
+pow =
+{:(b, e)
+   if(equals(0, e), {1;}, {
+        pow(b, e - 1) * b;
+   });
+};
+print(pow(2, 3));  # prints 8
+```
+
+```
+true = {1;};
+false = {0;};
+not = {:(v) if(v, false, true);};
+and = {:(a,b) if(a, {if(b, true, false);}, false);};
+or = {:(a,b) if(a, true, {if(b, true, false);});};
+le = {:(v1, v2) if(or(lt(v1, v2), equals(v1, v2)), true, false);};
+ge = {:(v1, v2) if(or(gt(v1, v2), equals(v1, v2)), true, false);};
+```
+
+For more examples, browse through the [std](tree/main/std) lib.
