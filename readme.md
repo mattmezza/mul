@@ -247,6 +247,21 @@ For more examples, browse through the [std](https://github.com/mattmezza/mul/tre
 `pip install mul` installs the latest version of `mul`. Make sure 
 you have a virtual env with `python3.11.0rc2` or newer.
 
+# Programmatic usage
+
+`mul` can be used within python projects as a library.
+
+```
+import mul
+
+
+i = mul.Interpreter.with_std()
+a = i.eval('a = 5;')
+b = i.eval('b = 10;')
+res = i.eval('res = a + b;')
+print(res.val)  # prints 15
+```
+
 # Contributing
 
 I don't know if I will have time to review PRs and contributions but you can 
