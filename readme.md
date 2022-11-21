@@ -1,5 +1,6 @@
 mul
 ===
+[![PyPI version](https://badge.fury.io/py/mul.svg)](https://badge.fury.io/py/mul)
 
 `mul` (my useless language) is a useless, interpreted programming language. 
 I created it to learn more about programming languages without any 
@@ -17,7 +18,6 @@ It features:
 greeter = {:(who) print('Hello, ' + who + '!');};
 greeter("world");
 ```
-
 # Main characteristics
 
 The implementation is in Python, but in the future I'd like to port it to 
@@ -28,17 +28,14 @@ its uselessness).
 
 By default, every variable is read-only. You can overwrite variables by 
 consciously using the `set` function.
-
 ```
 a = 5;
 a = 6; # error Cannot re-assign symbol 'a'.
 set('a', 6);
 print(a); # prints '6.0'
 ```
-
 There are no statements, and everything is an expression, with a return value.
 If you play around with the REPL you will get what I mean:
-
 ```
 $ python -m mul
 > nickname = 'mattmezza';
@@ -68,12 +65,10 @@ Numbers can only use `[.0-9]` (so no negative numbers – use `0 - num;` instead
 Strings can be created with either double `"..."` or single `'...'` quotes. 
 Escaping is not implemented but you can have multiline strings. 
 You can mix quotes within string to accomplish something like this:
-
 ```
 > '"Hello", she said.'
 "Hello", she said.
 ```
-
 # Types
 
 There are just a few types baked into the language: `None`, `Number`, `String` and `Function`.
@@ -89,31 +84,25 @@ No distinction between integer or float, everything is a number
 num = 4.3;
 another_num = 5;
 ```
-
 Negative numbers are not supported (sorry). You can use the following:
 ```
 negative_num = 0 - 4;
 ```
-
 `0` is considered `false` and anything else is considered `true` even without 
 having the explicit concept of a `Boolean` type.
-
 
 `true` and `false` themselves are implemented as functions like so:
 ```
 true = {1;};
 false = {0;};
 ```
-
 ## `String`
 
 Strings can be created with single or double quotes.
-
 ```
 name = 'Matteo';
 nickname = "mattmezza";
 ```
-
 Strings can be concatenated with `+`.
 
 ## `Function`
@@ -126,26 +115,21 @@ fullname = {
     fname + lname;
 };
 ```
-
 The last expression is what the function will return when called. 
 Functions can be called like so:
 ```
 fullname();
 ```
-
 Functions can have arguments defined as formal params like so:
-
 ```
 fullname = {:(fname, lname)
     fname + lname;
 };
 ```
-
 As you would expect, such function can be called like so:
 ```
 fullname('Matt', 'M');
 ```
-
 # Operators and precedence
 
 `mul` only has diadic operations implemented (so no monadic ops for now).
@@ -172,16 +156,13 @@ For instance, there is an `if` function that you can use like so:
 ```
 if(boolean, function, function_else);
 ```
-
 # Comments
 
 Single line comments are allowed by prepending the comment text with a `#`.
-
 ```
 # this is a comment
 a = 5;  # this is a comment too
 ```
-
 # The standard library
 
 A very small `std` has been built so far. It includes things like:
@@ -191,7 +172,6 @@ A very small `std` has been built so far. It includes things like:
 - `operator` functions like `sum`, `sub`, `mul`, `div`, etc...
 
 The `std` lib is extremely sparse and unstructured, beware.
-
 
 ## Native hooks implementation
 
@@ -223,22 +203,17 @@ Given `hello_world.mul` containing:
 greeter = {:(who) print('Hello, ' + who + '!');};
 greeter('world');
 ```
-
 ```
 $ python -m mul hello_world.mul
 Hello, world!
 ```
-
-
 There is also a `REPL` interface:
-
 ```
 $ python -m mul
 > a = 5;
 Type.NUM
 5.0
 ```
-
 `ctrl+d` quits the `REPL`.
 
 ## Development
@@ -247,7 +222,6 @@ Type.NUM
 - `python -m mul program.mul -a`: prints the AST as parsed by the parser
 
 # Code Examples
-
 ```
 pow =
 {:(b, e)
@@ -257,7 +231,6 @@ pow =
 };
 print(pow(2, 3));  # prints 8
 ```
-
 ```
 true = {1;};
 false = {0;};
@@ -267,16 +240,12 @@ or = {:(a,b) if(a, true, {if(b, true, false);});};
 le = {:(v1, v2) if(or(lt(v1, v2), equals(v1, v2)), true, false);};
 ge = {:(v1, v2) if(or(gt(v1, v2), equals(v1, v2)), true, false);};
 ```
-
 For more examples, browse through the [std](https://github.com/mattmezza/mul/tree/main/std) lib.
-
 
 # Installation
 
-`mul` is currently not installable via any pkg manager. If you want to play 
-with it, you'll have to clone the repo. It works with `python3.11.0rc2`, but 
-it should also work with lower versions of `python3`.
-
+`pip install mul` installs the latest version of `mul`. Make sure 
+you have a virtual env with `python3.11.0rc2` or newer.
 
 # Contributing
 
