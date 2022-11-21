@@ -5,6 +5,12 @@ mul
 I created it to learn more about programming languages without any 
 utility expectation whatsoever.
 
+# Hello, world!
+```
+greeter = {:(who) print('Hello, ' + who + '!');};
+greeter("world");
+```
+
 # Main characteristics
 
 The implementation is in Python, but in the future I'd like to port it to 
