@@ -5,7 +5,7 @@ mul
 I created it to learn more about programming languages without any 
 utility expectation whatsoever.
 
-## Main characteristics
+# Main characteristics
 
 The implementation is in Python, but in the future I'd like to port it to 
 a compiled language (maybe Rust).
@@ -15,11 +15,12 @@ its uselessness).
 
 `mul` is dynamically strongly typed.
 
-### Types
+
+# Types
 
 There are just a few types baked into the language: `Boolean`, `Number`, `String` and `Function`.
 
-#### `Number`
+## `Number`
 
 No distinction between integer or float, everything is a number
 ```
@@ -32,7 +33,7 @@ Negative numbers are not supported (sorry). You can use the following:
 negative_num = 0 - 4;
 ```
 
-#### `String`
+## `String`
 
 Strings can be created with single or double quotes.
 
@@ -43,7 +44,7 @@ nickname = "mattmezza";
 
 Strings can be concatenated with `+`.
 
-#### `Function`
+## `Function`
 
 Functions can be defined like so:
 ```
@@ -73,7 +74,7 @@ As you would expect, such function can be called like so:
 fullname('Matt', 'M');
 ```
 
-### Control flow
+# Control flow
 
 There are no other constructs in the language (no `if`, no `for`, no `while`, 
 etc...). In order to make the language a little bit more useful, such 
@@ -84,7 +85,7 @@ For instance, there is an `if` function that you can use like so:
 if(boolean, function, function_else);
 ```
 
-### Comments
+# Comments
 
 Single line comments are allowed by prepending the comment text with a `#`.
 
@@ -93,7 +94,7 @@ Single line comments are allowed by prepending the comment text with a `#`.
 a = 5;  # this is a comment too
 ```
 
-### The standard library
+# The standard library
 
 A very small `std` has been built so far. It includes things like:
 
@@ -104,7 +105,7 @@ A very small `std` has been built so far. It includes things like:
 The `std` lib is extremely sparse and unstructured, beware.
 
 
-### Native hooks implementation
+## Native hooks implementation
 
 `mul` is implemented via native function call hooks that make it possible to 
 export host language feature to `mul` itself (as done for the `if` function).
@@ -113,7 +114,7 @@ Native hooks implementation can be leveraged to quickly fill holes in the
 `std` lib.
 
 
-### Tooling
+# Tooling
 
 There is no executor at the moment (altough creating one can be done quite 
 easily). There is a `REPL` interface though:
@@ -128,7 +129,7 @@ Type.NUM
 `ctrl+d` quits the `REPL`.
 
 
-## Examples
+# Examples
 
 ```
 pow =
@@ -150,4 +151,18 @@ le = {:(v1, v2) if(or(lt(v1, v2), equals(v1, v2)), true, false);};
 ge = {:(v1, v2) if(or(gt(v1, v2), equals(v1, v2)), true, false);};
 ```
 
-For more examples, browse through the [std](tree/main/std) lib.
+For more examples, browse through the [std](https://github.com/mattmezza/mul/tree/main/std) lib.
+
+
+# Installation
+
+`mul` is currently not installable via any pkg manager. If you want to play 
+with it, you'll have to clone the repo. It works on `python3.11.0rc2`.
+
+
+# Contributing
+
+I don't know if I will have time to review PRs and contributions but you can 
+have fun with the language and maybe port it to other host languages. If you 
+do, let me know, I'm a sucker for programming languages and I would enjoy 
+checking out what you did.
