@@ -18,6 +18,8 @@ It features:
 greeter = {:(who) print('Hello, ' + who + '!');};
 greeter("world");
 ```
+`pip install mul && mul hello_world.mul` (*needs `python3.11.0rc2` or above*)
+
 # Main characteristics
 
 The implementation is in Python, but in the future I'd like to port it to 
