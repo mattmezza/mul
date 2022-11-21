@@ -5,6 +5,13 @@ mul
 I created it to learn more about programming languages without any 
 utility expectation whatsoever.
 
+It features:
+- dynamic, strong typing
+- lambda functions
+- functional paradigm
+- easy to write interpreter (≈26Kb/742 LOC of python)
+- REPL
+
 # Hello, world!
 ```
 greeter = {:(who) print('Hello, ' + who + '!');};
