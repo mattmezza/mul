@@ -1,9 +1,11 @@
-from .ast import *  # noqa
-from .interpretation import interpret  # noqa
-from .interpretation import Return, SymTable
-from .lexer import lex  # noqa
-from .parser import parse  # noqa
+from dataclasses import dataclass
+from typing import Self, Type
+
 from . import lib
+from .ast import *  # noqa
+from .interpretation import Return, SymTable, interpret
+from .lexer import lex
+from .parser import parse
 
 
 def eval(prog: str, table: SymTable | None = None) -> Return:
