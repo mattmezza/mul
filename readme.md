@@ -99,6 +99,22 @@ As you would expect, such function can be called like so:
 fullname('Matt', 'M');
 ```
 
+# Operators and precedence
+
+`mul` only has diadic operations implemented (so no monadic ops for now).
+This means you can't do `-2;` but you'd rather do `0-2;`.
+
+The implemented operators are:
+- `+` as in `2+3;` returning `5`
+- `-` as in `2-3;` returning `-1`
+- `*` as in `2*3;` returning `6`
+- `/` as in `2/3;` returning `0.6666666666666666`
+
+The precedence is what you'd expect:
+- `2+3*4;` returning `14`
+- `2+3/3;` returning `3`
+- `3*4/12;` returning `1`
+
 # Control flow
 
 There are no other constructs in the language (no `if`, no `for`, no `while`, 
