@@ -1,4 +1,4 @@
-.PHONY: clean format lint loc size build publish
+.PHONY: clean format lint loc size build publish release
 
 clean:
 	@find . | grep -E "(/__pycache__$$|\.pyc$$|\.pyo$$)" | xargs rm -rf
@@ -16,3 +16,5 @@ build: clean lint
 	@poetry build
 publish:
 	@poetry publish --skip-existing
+release: build publish
+	@gh release create v$(v) --generate-notes ./dist/*
