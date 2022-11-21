@@ -26,12 +26,24 @@ a compiled language (maybe Rust).
 The language is designed to be easy to write an interpreter for (therefore 
 its uselessness).
 
-`mul` is dynamically strongly typed.
+By default, every variable is read-only. You can overwrite variables by 
+consciously using the `set` function.
+
+```
+a = 5;
+a = 6; # error Cannot re-assign symbol 'a'.
+set('a', 6);
+print(a); # prints '6.0'
+```
 
 
 # Types
 
-There are just a few types baked into the language: `Boolean`, `Number`, `String` and `Function`.
+There are just a few types baked into the language: `None`, `Boolean`, `Number`, `String` and `Function`.
+
+## `None`
+
+`None` is a type that you can instantiate from the literal `none`.
 
 ## `Number`
 
@@ -126,6 +138,16 @@ export host language feature to `mul` itself (as done for the `if` function).
 Native hooks implementation can be leveraged to quickly fill holes in the 
 `std` lib.
 
+A number of functions are implemented via native hooks:
+- `char_at`
+- `concat`
+- `equals`
+- `lt`
+- `gt`
+- `if`
+- `len`
+- `print`
+- `set`
 
 # Tooling
 
