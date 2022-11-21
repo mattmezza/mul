@@ -180,3 +180,8 @@ I don't know if I will have time to review PRs and contributions but you can
 have fun with the language and maybe port it to other host languages. If you 
 do, let me know, I'm a sucker for programming languages and I would enjoy 
 checking out what you did.
+
+# Acknowledgement
+
+`mul` is inspired by [cell](https://github.com/andybalaam/cell). Thanks to Andy 
+explaining rather difficult concepts in such a simple way.
