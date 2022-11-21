@@ -36,10 +36,47 @@ set('a', 6);
 print(a); # prints '6.0'
 ```
 
+There are no statements, and everything is an expression, with a return value.
+If you play around with the REPL you will get what I mean:
+
+```
+$ python -m mul
+> nickname = 'mattmezza';
+Type.STR
+mattmezza
+> f = {};
+Type.FN
+<function>
+```
+- an assignment returns the assigned value
+- a fn call returns the last expression in the fn definition
+
+# Syntax
+
+## Whitespaces
+
+Whitespace is not influencing parsing. All whitespaces are stripped out after 
+lexical analysis.
+
+## Symbols
+
+Identifiers can only use `[_a-zA-Z0-9]` and they have to start with `[_a-zA-Z]`.
+
+## Literals
+
+Numbers can only use `[.0-9]` (so no negative numbers – use `0 - num;` instead).
+Strings can be created with either double `"..."` or single `'...'` quotes. 
+Escaping is not implemented but you can have multiline strings. 
+You can mix quotes within string to accomplish something like this:
+
+```
+> '"Hello", she said.'
+"Hello", she said.
+```
 
 # Types
 
-There are just a few types baked into the language: `None`, `Boolean`, `Number`, `String` and `Function`.
+There are just a few types baked into the language: `None`, `Number`, `String` and `Function`.
 
 ## `None`
 
@@ -56,6 +93,16 @@ another_num = 5;
 Negative numbers are not supported (sorry). You can use the following:
 ```
 negative_num = 0 - 4;
+```
+
+`0` is considered `false` and anything else is considered `true` even without 
+having the explicit concept of a `Boolean` type.
+
+
+`true` and `false` themselves are implemented as functions like so:
+```
+true = {1;};
+false = {0;};
 ```
 
 ## `String`
