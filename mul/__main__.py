@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import fileinput
 import itertools
 import readline  # noqa: needed to make up arrow work in the REPL
@@ -7,8 +5,8 @@ import signal
 import sys
 from typing import Iterable
 
-from . import exec, lex, lib, parse
-from .interpretation import SymTable, pprint
+from . import Interpreter, lex, parse
+from .interpretation import pprint
 
 
 def line() -> Iterable[str]:
@@ -20,32 +18,30 @@ def line() -> Iterable[str]:
         sys.exit(0)
 
 
-def repl(table: SymTable):
+def repl(interpreter: Interpreter):
     signal.signal(signal.SIGINT, lambda s, f: ...)
     while True:
         try:
-            for val in exec(line(), table):
+            for val in interpreter.eval(line()):
                 sys.stdout.write(str(val))
                 sys.stdout.write("\n")
         except Exception as e:
-            table.stderr().write(str(e))
-            table.stderr().write("\n")
-    table.stdout().write("\n")
-    table.stdout().flush()
+            interpreter.env.stderr().write(str(e))
+            interpreter.env.stderr().write("\n")
+    interpreter.env.stdout().write("\n")
+    interpreter.env.stdout().flush()
 
 
 chars = itertools.chain.from_iterable
 
 
 def main():
-    glob_table = SymTable.root()
+    interpreter = Interpreter.with_std()
     if len(sys.argv) == 1:
-        lib.import_all(glob_table)
-        repl(glob_table)
+        repl(interpreter)
     elif len(sys.argv) == 2:
-        lib.import_all(glob_table)
         with fileinput.input() as f:
-            exec(chars(f), glob_table)
+            interpreter.eval(chars(f))
     else:
         if sys.argv[2] in ("-t", "--tokens"):
             del sys.argv[2]
