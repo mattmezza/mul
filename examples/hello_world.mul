@@ -1,0 +1,4 @@
+greet = {:(who)
+  print('Hello, ' + who + '!');
+};
+greet("mattmezza");

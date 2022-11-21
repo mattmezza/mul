@@ -1,19 +1,38 @@
 [tool.poetry]
 name = "mul"
-version = "0.1.0"
+include = [{ path = "std", format = ["sdist", "wheel"] }]
+version = "0.1.2"
 description = "mul · My Useless Language, a simple interpreted programming language"
 authors = ["Matteo Merola <mattmezza@gmail.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "readme.md"
+repository = "https://github.com/mattmezza/mul"
+documentation = "https://github.com/mattmezza/mul/blob/main/readme.md"
+keywords = ["programming-language", "language", "interpreted"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/mattmezza/poetry/issues"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
 isort = "^5.10.1"
 flake8-pyproject = "^1.2.0"
 flake8 = "^5.0.4"
+
+[tool.poetry.scripts]
+mul = "mul.__main__:main"
 
 [tool.isort]
 profile = "black"
