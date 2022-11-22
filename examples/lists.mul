@@ -1,0 +1,12 @@
+n = list4(0, 1, 2, 3);
+n5 = append(n, 4);
+print(reduce(sum, n5)); # prints 10.0
+print(reduce(sum, map({:(x) x + 10}, n5))); # prints 60.0
+show = {:(l) map(print, l)};
+show(filter({:(x) ge(x, 4)}, n5)); # prints 4.0
+print('');
+show(filter({:(x) lt(x, 4)}, n5)); # prints 0.0 1.0 2.0 3.0
+l4 = list4('1', '2', '3', '4');
+print(foldl({:(x, y) '(' + x + '+' + y + ')'}, '0', l4));
+print(foldr({:(x, y) '(' + x + '+' + y + ')'}, '0', l4));
+show(reverse(l4)); # prints 4 3 2 1

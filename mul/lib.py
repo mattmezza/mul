@@ -99,9 +99,4 @@ def import_all(table: SymTable):
     table.put("set", FnNative(set_).as_return())
     table.put("none", Return.none())
 
-    include("std/logic.lang", table)
-    include("std/str.lang", table)
-    include("std/pair.lang", table)
-    include("std/list.lang", table)
-    include("std/operator.lang", table)
-    include("std/test.lang", table)
+    include("std/lib.mul", table)

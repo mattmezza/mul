@@ -1,0 +1,153 @@
+true = {1;};
+false = {0;};
+not = {:(v) if(v, false, true);};
+and = {:(a,b) if(a, {if(b, true, false);}, false);};
+or = {:(a,b) if(a, true, {if(b, true, false);});};
+eq = {:(v1, v2) equals(v1, v2);};
+le = {:(v1, v2) if(or(lt(v1, v2), eq(v1, v2)), true, false);};
+ge = {:(v1, v2) if(or(gt(v1, v2), eq(v1, v2)), true, false);};
+eq? = eq;
+null? = {:(v) eq?(v, none)};
+all =
+{:(l)
+    reduce = {:(l, acc)
+        if(acc, {
+            if(not(equals(l, none)), {
+                reduce(second(l), first(l));
+            }, {1;});
+        }, {0;});
+    };
+    reduce(l, 1);
+};
+any =
+{:(l)
+    reduce = {:(l, acc)
+        if(acc, {1;}, {
+            if(not(equals(l, none)), {
+                reduce(second(l), first(l));
+            }, {0;});
+        });
+    };
+    reduce(l, 0);
+};
+
+#*** operators
+sum = {:(a, b) a + b;};
+sub = {:(a, b) a - b;};
+mul = {:(a, b) a * b;};
+div = {:(a, b) a / b;};
+pow =
+{:(b, e)
+   if(equals(0, e), {1;}, {
+        pow(b, e - 1) * b;
+   });
+};
+
+#*** pairs
+pair = {:(f, s)
+  {:(which) if(eq(which, "h"), {f}, {s})}
+};
+
+head = {:(p) p("h");};
+tail = {:(p) p("t");};
+cons = pair;
+car = head;
+cdr = tail;
+list0 = {none};
+list1 = {:(a)             pair(a, none);};
+list2 = {:(a, b)          pair(a, list1(b));};
+list3 = {:(a, b, c)       pair(a, list2(b, c));};
+list4 = {:(a, b, c, d)    pair(a, list3(b, c, d));};
+list5 = {:(a, b, c, d, e) pair(a, list4(b, c, d, e));};
+
+prepend = pair;
+
+append =
+{:(lst, item)
+    if(equals(lst, none), {
+        list1(item);
+    }, {
+        pair(head(lst), append(tail(lst), item));
+    });
+};
+
+
+#*** fn
+repeatFn = {:(n, fn)
+  if(le(n, 0), {}, {
+    repeatFn(n - 1, fn);
+    fn(n)
+  });
+};
+
+map = {:(fn, l)
+  if(null?(l), {}, {
+    cons(fn(head(l)), map(fn, tail(l)))
+  })
+};
+
+filter = {:(fn, l)
+  if(null?(l), {}, {
+      if(fn(head(l)), {
+        cons(head(l), filter(fn, tail(l)))
+      }, {
+        filter(fn, tail(l))
+      })
+  })
+};
+
+reverse = {:(l)
+  if(null?(l), {}, {
+    append(reverse(tail(l)), head(l));
+  })
+};
+
+foldl = {:(fn, ini, l)
+  if(null?(l), {
+    ini
+  }, {
+    foldl(fn, fn(ini, head(l)), tail(l))
+  })
+};
+
+foldr = {:(fn, ini, l)
+  fold = {:(fn, ini, l)
+    if(null?(l), {
+      ini
+    }, {
+      fold(fn, fn(head(l), ini), tail(l))
+    })
+  };
+  fold(fn, ini, reverse(l))
+};
+
+reduce = {:(fn, l)
+  foldl(fn, head(l), tail(l))
+};
+
+#*** testing
+assert = {:(v)
+  if(v, {v}, {
+    print("Assert failed.");STD_TEST_ASSERT_FAILED;
+  })
+};
+
+
+#*** str
+chars_in = {:(s)
+  impl = {:(s, i)
+    if(equals(len(s), i), {none},
+    {
+      {:(which)
+        if(eq(which, "f"),
+        {
+          char_at(i, s)
+        },
+        {
+          impl(s, i + 1)
+        });
+      }
+    });
+  };
+  impl(s, 0);
+};
