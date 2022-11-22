@@ -12,22 +12,22 @@ append =
     if(equals(lst, none), {
         list1(item);
     }, {
-        pair(first(lst), append(second(lst), item));
+        pair(head(lst), append(tail(lst), item));
     });
 };
 
 for =
 {:(l, fn)
     if(not(equals(l, none)), {
-        fn(first(l));
-        for(second(l), fn);
+        fn(head(l));
+        for(tail(l), fn);
     }, { });
 };
 
 reduce =
 {:(l, fn, acc)
     if(not(equals(l, none)), {
-        reduce(second(l), fn, fn(first(l), acc));
+        reduce(tail(l), fn, fn(head(l), acc));
     }, {
         acc;
     });
