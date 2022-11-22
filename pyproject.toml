@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mul"
 include = [{ path = "std", format = ["sdist", "wheel"] }]
-version = "0.1.5"
+version = "0.2.0"
 description = "mul · My Useless Language, a simple interpreted programming language"
 authors = ["Matteo Merola <mattmezza@gmail.com>"]
 license = "MIT"
