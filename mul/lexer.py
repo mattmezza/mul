@@ -52,6 +52,6 @@ def lex(program: str) -> Iterable[T.Token]:
         elif re.match("[.0-9]", c):
             yield T.Num(_scan(c, chars, "[.0-9]"))
         elif re.match("[_a-zA-Z]", c):
-            yield T.Sym(_scan(c, chars, "[_a-zA-Z0-9]"))
+            yield T.Sym(_scan(c, chars, "[_a-zA-Z0-9?!]"))
         else: raise Exception(f"Invalid char '{c}'.")
         # fmt: on
