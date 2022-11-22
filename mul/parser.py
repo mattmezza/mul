@@ -37,7 +37,14 @@ class Parser:
             return self.next(ast.OpDiadic.div(cast(ast.AST, prev), nxt))
         elif token.is_a(T.LPar):
             args: ast.Seq = self.exprs(T.Comma(), T.RPar())
-            return self.next(ast.Call(cast(ast.Sym, prev), args))
+            if prev is None:
+                raise Exception("Nothing to call.")
+            if prev.is_a(ast.Sym):
+                return self.next(ast.Call(cast(ast.Sym, prev), args))
+            elif prev.is_a(ast.Fn):
+                return self.next(ast.CallAnonymous(cast(ast.Fn, prev), args))
+            else:
+                raise Exception("Function on non-callable.")
         elif token.is_a(T.LBrace):
             params: ast.Params = self.params()
             body: ast.Seq = self.exprs(T.Semi(), T.RBrace())

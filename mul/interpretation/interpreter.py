@@ -56,9 +56,17 @@ class Interpreter(Visitor):
     ) -> Sequence[Union[Return, Fn, Tuple[str]]]:
         return tuple(map(self.visit, tree.children))
 
-    def call(self: Self, tree: ast.Call) -> Return:
-        ret = self.sym(tree.sym)
+    def call(self: Self, tree: ast.Call | ast.CallAnonymous) -> Return:
+        fn = None
+        ret = None
+
+        if tree.is_a(ast.CallAnonymous):
+            ret = self.fn(tree.fn)
+        elif tree.is_a(ast.Call):
+            ret = self.sym(tree.sym)
+
         fn = ret.val
+
         args = self.seq(tree.args)
         if ret.type == Return.Type.FN:
             if len(fn.params) != len(args):
@@ -73,7 +81,7 @@ class Interpreter(Visitor):
 
             res = self.seq(fn.body)
             self.tables.pop()
-            return res[-1]
+            return res[-1] if len(res) else Return.none()
         elif ret.type == Return.Type.FN_NATIVE:
             params = signature(fn.py_fn).parameters
             if (len(params) - 1) != len(args):

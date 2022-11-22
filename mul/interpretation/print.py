@@ -60,10 +60,13 @@ class PrettyPrint(Visitor):
         self.decr()
         return Fn(tuple(), tree.body, self.table)
 
-    def call(self, tree: ast.Call) -> Return:
+    def call(self, tree: ast.Call | ast.CallAnonymous) -> Return:
         self.print("call")
         self.incr()
-        self.sym(tree.sym)
+        if tree.is_a(ast.Call):
+            self.sym(tree.sym)
+        elif tree.is_a(ast.CallAnonymous):
+            self.fn(tree.fn)
         self.incr()
         self.seq(tree.args)
         self.decr()

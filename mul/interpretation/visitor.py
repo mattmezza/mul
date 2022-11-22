@@ -23,7 +23,7 @@ class Visitor(Protocol):
     def seq(self, tree: ast.Seq) -> Tuple[Union[Return, Fn, Tuple[str]]]:
         ...
 
-    def call(self, tree: ast.Call) -> Return:
+    def call(self, tree: ast.Call | ast.CallAnonymous) -> Return:
         ...
 
     def params(self, tree: ast.Params) -> Tuple[str]:
@@ -47,8 +47,8 @@ class Visitor(Protocol):
             return self.params(cast(ast.Params, tree))
         elif tree.is_a(ast.Fn):
             return self.fn(cast(ast.Fn, tree))
-        elif tree.is_a(ast.Call):
-            return self.call(cast(ast.Call, tree))
+        elif tree.is_a(ast.Call) or tree.is_a(ast.CallAnonymous):
+            return self.call(tree)
         elif tree.is_a(ast.Assignment):
             return self.assignment(cast(ast.Assignment, tree))
         else:

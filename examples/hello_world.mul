@@ -1,4 +1,3 @@
-greet = {:(who)
+{:(who)
   print('Hello, ' + who + '!');
-};
-greet("mattmezza");
+}("mattmezza");

@@ -86,6 +86,12 @@ class Call(AST):
 
 
 @dataclass(frozen=True)
+class CallAnonymous(AST):
+    fn: Fn
+    args: Seq
+
+
+@dataclass(frozen=True)
 class Assignment(AST):
     sym: Sym
     val: AST
