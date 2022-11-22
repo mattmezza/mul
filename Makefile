@@ -17,4 +17,5 @@ build: clean lint
 publish:
 	@poetry publish --skip-existing
 release: build publish
+	@git push
 	@gh release create v$(v) --generate-notes ./dist/*
