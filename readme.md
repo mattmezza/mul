@@ -39,7 +39,7 @@ print(a); # prints '6.0'
 There are no statements, and everything is an expression, with a return value.
 If you play around with the REPL you will get what I mean:
 ```
-$ python -m mul
+$ mul
 > nickname = 'mattmezza';
 Type.STR
 mattmezza
@@ -202,7 +202,7 @@ A number of functions are implemented via native hooks:
 
 ## Execution
 
-`mul` programs can be run via `python -m mul program.mul`.
+`mul` programs can be run via `$ mul program.mul`.
 
 Given `hello_world.mul` containing:
 ```
@@ -210,12 +210,12 @@ greeter = {:(who) print('Hello, ' + who + '!');};
 greeter('world');
 ```
 ```
-$ python -m mul hello_world.mul
+$ mul hello_world.mul
 Hello, world!
 ```
 There is also a `REPL` interface:
 ```
-$ python -m mul
+$ mul
 > a = 5;
 Type.NUM
 5.0
@@ -224,8 +224,8 @@ Type.NUM
 
 ## Development
 
-- `python -m mul program.mul -t`: prints the tokens as parsed by the lexer
-- `python -m mul program.mul -a`: prints the AST as parsed by the parser
+- `mul program.mul -t`: prints the tokens as parsed by the lexer
+- `mul program.mul -a`: prints the AST as parsed by the parser
 
 # Code Examples
 ```
