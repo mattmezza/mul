@@ -59,7 +59,7 @@ lexical analysis.
 
 ## Symbols
 
-Identifiers can only use `[_a-zA-Z0-9]` and they have to start with `[_a-zA-Z]`.
+Identifiers can only use `[_a-zA-Z0-9!?]` and they have to start with `[_a-zA-Z]`.
 
 ## Literals
 
@@ -121,6 +121,10 @@ The last expression is what the function will return when called.
 Functions can be called like so:
 ```
 fullname();
+```
+Anonymous function calls are supported:
+```
+{:(fname, lname) fname + ' ' + lname}('matt', 'mezza');
 ```
 Functions can have arguments defined as formal params like so:
 ```
