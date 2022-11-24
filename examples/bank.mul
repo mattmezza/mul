@@ -1,0 +1,66 @@
+make_account = {:(balance)
+    transaction_log = list0;
+    log_transaction = {:(type, amount)
+        set!('transaction_log', prepend(pair(type, amount), transaction_log));
+    };
+    {:(transaction)
+        if(eq?(transaction, 'withdraw'), {
+            {:(amount)
+                if(ge(balance, amount), {
+                    set!('balance', balance - amount);
+                    log_transaction(transaction, amount);
+                    balance;
+                }, {panic('Insufficint funds');});
+            };
+        }, {
+            if(eq?(transaction, 'deposit'), {
+                {:(amount)
+                    set!('balance', balance + amount);
+                    log_transaction(transaction, amount);
+                    balance;
+                }
+            }, {
+                if(eq?(transaction, 'balance'), {
+                    {balance}
+                }, {
+                    if(eq?(transaction, 'log'), {
+                        {transaction_log}
+                    }, {
+                        panic('Invalid transaction "' + transaction + '"');
+                    });
+                });
+            });
+        });
+    };
+};
+
+fmt_title = {:(h1) print('');print('--- ' + h1 + ' ---')};
+fmt_currency = {:(c) print('(' + c + ')')};
+fmt_transaction = {:(message, amount, balance, currency)
+    fmt_title(message);
+    print(amount);
+    fmt_currency(currency);
+};
+fmt_widthrawal = {:(amount, balance)
+    fmt_transaction('Withdrawal', amount, balance, 'EUR')
+};
+fmt_deposit = {:(amount, balance)
+    fmt_transaction('Deposit', amount, balance, 'EUR')
+};
+
+account_matt = make_account(3000);
+withdraw = account_matt('withdraw');
+deposit = account_matt('deposit');
+print(fmt_widthrawal(2000, withdraw(2000)));
+print(fmt_deposit(1000, deposit(1000)));
+print(fmt_deposit(1, deposit(1)));
+
+log = account_matt('log');
+print(fmt_title('Transaction log'));
+print_transaction = {:(t)
+    print(head(t));
+    print(tail(t));
+    print('');
+};
+print_log = {:(l) map(print_transaction, l)};
+print_log(log());
